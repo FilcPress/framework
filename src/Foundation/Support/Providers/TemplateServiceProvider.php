@@ -4,7 +4,7 @@ namespace FilcPress\Foundation\Support\Providers;
 
 use FilcPress\Templating\TemplatesManager;
 use FilcPress\Support\Facades\Template;
-use FilcPress\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider;
 
 class TemplateServiceProvider extends ServiceProvider
 {
