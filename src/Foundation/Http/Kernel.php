@@ -8,43 +8,19 @@ use Illuminate\Support\Facades\Facade;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Http\Kernel as LaravelKernel;
 use Symfony\Component\Debug\Exception\FatalThrowableError;
+use Illuminate\Foundation\Http\Events\RequestHandled;
 
 class Kernel extends LaravelKernel
 {
     /**
-     * The templates manager instance.
-     *
-     * @var \FilcPress\Templating\TemplatesManager
-     */
-    protected $templatesManager;
-
-    /**
-     * The bootstrap classes for the application.
-     *
-     * @var array
-     */
-    protected $bootstrappers = [
-        'Illuminate\Foundation\Bootstrap\DetectEnvironment',
-        'Illuminate\Foundation\Bootstrap\LoadConfiguration',
-        'Illuminate\Foundation\Bootstrap\ConfigureLogging',
-        'Illuminate\Foundation\Bootstrap\HandleExceptions',
-        'Illuminate\Foundation\Bootstrap\RegisterFacades',
-        'Illuminate\Foundation\Bootstrap\RegisterProviders',
-        'Illuminate\Foundation\Bootstrap\BootProviders',
-    ];
-
-    /**
      * Create a new HTTP kernel instance.
      *
      * @param  \Illuminate\Contracts\Foundation\Application  $app
-     * @param  \FilcPress\Templating\TemplatesManager  $templatesManager
      * @return void
      */
     public function __construct(Application $app)
-//    public function __construct(Application $app, TemplatesManager $templatesManager)
     {
         $this->app = $app;
-//        $this->templatesManager = $templatesManager;
     }
 
     /**
@@ -69,7 +45,7 @@ class Kernel extends LaravelKernel
             $response = $this->renderException($request, $e);
         }
 
-        $this->app['events']->fire('kernel.handled', [$request, $response]);
+        event(new RequestHandled($request, $response));
 
         return $response;
     }

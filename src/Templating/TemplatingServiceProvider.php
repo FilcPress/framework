@@ -35,7 +35,7 @@ class TemplatingServiceProvider extends ServiceProvider
      */
     protected function registerTemplatesManager()
     {
-        $this->app['template'] = $this->app->share(function ($app) {
+        $this->app->singleton('template', function ($app) {
             return new TemplatesManager($app);
         });
     }
