@@ -17,7 +17,7 @@ class WordPressServiceProvider extends ServiceProvider
     {
         if ($this->shouldLoadTheme()) {
             // Load the theme template.
-            require_once( ABSPATH . WPINC . '/template-loader.php' );
+            require_once(ABSPATH.WPINC.'/template-loader.php');
             return;
         }
     }
@@ -30,7 +30,7 @@ class WordPressServiceProvider extends ServiceProvider
     public function register()
     {
         if ($this->shouldReinitializeWordpress()) {
-            require( dirname( ABSPATH ) . '/wp-config.php' );
+            require(dirname(ABSPATH).'/wp-config.php');
             return;
         }
 
@@ -41,9 +41,9 @@ class WordPressServiceProvider extends ServiceProvider
             return;
         }
 
-        define( 'WP_USE_THEMES', true );
+        define('WP_USE_THEMES', true);
         // Load the WordPress library.
-        require( config('wordpress.path') . '/wp-load.php' );
+        require(config('wordpress.path').'/wp-load.php');
         // Set up the WordPress query.
         wp();
 
