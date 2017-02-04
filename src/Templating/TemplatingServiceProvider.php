@@ -53,7 +53,17 @@ class TemplatingServiceProvider extends ServiceProvider
     private function registerTemplates()
     {
         // Load all registered templates, so they display in admin
-        add_filter('theme_page_templates', [$this, 'getTemplates'], 99);
+        add_filter('theme_page_templates', [$this, 'getTemplatesForAdmin'], 99);
+    }
+
+    public function getTemplatesForAdmin()
+    {
+        $templates = $this->getTemplates();
+
+        // Remove the default template from list as it is already included by default by WordPress.
+        unset($templates['default']);
+
+        return $templates;
     }
 
     public function getTemplates()

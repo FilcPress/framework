@@ -328,6 +328,10 @@ class TemplateCollection implements Countable, IteratorAggregate
 
         if ($post->post_type == 'page') {
             $templateSlug = get_post_meta(get_the_ID(), '_wp_page_template', true);
+
+            if (! $templateSlug) {
+                $templateSlug = 'default';
+            }
         } else {
             throw new \Exception('Templates for post types other then pages are not supported yet.');
         }
