@@ -15,6 +15,10 @@ class WordPressServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if ($this->isCli()) {
+            return;
+        }
+
         if ($this->shouldLoadTheme()) {
             // Load the theme template.
             require_once(ABSPATH.WPINC.'/template-loader.php');
@@ -29,6 +33,10 @@ class WordPressServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        if ($this->isCli()) {
+            return;
+        }
+
         if ($this->shouldReinitializeWordpress()) {
             require(dirname(ABSPATH).'/wp-config.php');
             return;
@@ -80,5 +88,10 @@ class WordPressServiceProvider extends ServiceProvider
     private function setThemeToBeLoaded()
     {
         $this->loadTheme = true;
+    }
+
+    private function isCli()
+    {
+        return php_sapi_name() === 'cli';
     }
 }
