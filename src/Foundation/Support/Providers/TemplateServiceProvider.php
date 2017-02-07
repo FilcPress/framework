@@ -22,6 +22,10 @@ class TemplateServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if ($this->isCli()) {
+            return;
+        }
+
         $this->loadTemplates();
 
         $this->app->booted(function () {
@@ -46,6 +50,9 @@ class TemplateServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        if ($this->isCli()) {
+            return;
+        }
         //
     }
 
@@ -61,5 +68,10 @@ class TemplateServiceProvider extends ServiceProvider
         return call_user_func_array(
             [$this->app->make(TemplatesManager::class), $method], $parameters
         );
+    }
+
+    private function isCli()
+    {
+        return php_sapi_name() === 'cli';
     }
 }

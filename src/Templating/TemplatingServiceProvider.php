@@ -13,6 +13,10 @@ class TemplatingServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        if ($this->isCli()) {
+            return;
+        }
+
         $this->registerTemplates();
 
         $this->hookTemplate();
@@ -25,6 +29,10 @@ class TemplatingServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        if ($this->isCli()) {
+            return;
+        }
+
         $this->registerTemplatesManager();
     }
 
@@ -107,4 +115,9 @@ class TemplatingServiceProvider extends ServiceProvider
 //
 //        return get_template_directory() . '/index.php';
 //
+
+    private function isCli()
+    {
+        return php_sapi_name() === 'cli';
+    }
 }
