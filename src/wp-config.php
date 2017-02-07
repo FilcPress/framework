@@ -49,6 +49,11 @@ if (! function_exists('wp_config')) {
         // ========================
         define('WP_DEFAULT_THEME', 'theme');
 
+        // =============================================================
+        // Disable plugin installations, update, system updates and more
+        // =============================================================
+        define('DISALLOW_FILE_MODS', true);
+
         // ==============================================================
         // Salts, for security
         // Grab these from: https://api.wordpress.org/secret-key/1.1/salt
