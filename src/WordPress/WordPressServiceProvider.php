@@ -37,6 +37,8 @@ class WordPressServiceProvider extends ServiceProvider
             return;
         }
 
+        $this->registerAdminMenuManager();
+
         if ($this->shouldReinitializeWordpress()) {
             require(dirname(ABSPATH).'/wp-config.php');
             return;
@@ -56,6 +58,18 @@ class WordPressServiceProvider extends ServiceProvider
         wp();
 
         $this->setThemeToBeLoaded();
+    }
+
+    /**
+     * Register the admin menu manager instance.
+     *
+     * @return void
+     */
+    protected function registerAdminMenuManager()
+    {
+        $this->app->singleton('adminMenu', function ($app) {
+            return new AdminMenu($app);
+        });
     }
 
     /**
