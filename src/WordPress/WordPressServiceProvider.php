@@ -33,11 +33,11 @@ class WordPressServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $this->registerAdminMenuManager();
+
         if ($this->isCli()) {
             return;
         }
-
-        $this->registerAdminMenuManager();
 
         if ($this->shouldReinitializeWordpress()) {
             require(dirname(ABSPATH).'/wp-config.php');

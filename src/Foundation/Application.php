@@ -12,4 +12,14 @@ class Application extends LaravelApplication
      * @var string
      */
     const VERSION = '0.2';
+
+    /**
+     * Get the path to the application "app" directory.
+     *
+     * @return string
+     */
+    public function path()
+    {
+        return $this->basePath.DIRECTORY_SEPARATOR.'theme';
+    }
 }
