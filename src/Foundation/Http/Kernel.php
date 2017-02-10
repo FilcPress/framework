@@ -64,4 +64,14 @@ class Kernel extends LaravelKernel
 
         $this->bootstrap();
     }
+
+    /**
+     * Get middleware.
+     *
+     * @return array
+     */
+    public function getMiddleware()
+    {
+        return $this->middleware;
+    }
 }
