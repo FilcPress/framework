@@ -67,8 +67,8 @@ class WordPressServiceProvider extends ServiceProvider
      */
     protected function registerAdminMenuManager()
     {
-        $this->app->singleton('adminMenu', function ($app) {
-            return new AdminMenu($app);
+        $this->app->singleton('adminMenu', function () {
+            return new AdminMenu;
         });
     }
 
