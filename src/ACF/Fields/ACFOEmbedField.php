@@ -1,0 +1,20 @@
+<?php
+
+namespace FilcPress\ACF\Fields;
+
+use FilcPress\ACF\ACFField;
+use FilcPress\ACF\Options\WidthOption;
+use FilcPress\ACF\Options\HeightOption;
+
+class ACFOEmbedField extends ACFField
+{
+    use WidthOption, HeightOption;
+
+    protected $type = 'oembed';
+
+    public function __construct()
+    {
+        $this->width(640);
+        $this->height(390);
+    }
+}
