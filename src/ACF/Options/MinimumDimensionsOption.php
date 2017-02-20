@@ -2,13 +2,11 @@
 
 namespace FilcPress\ACF\Options;
 
-trait MinimumOption
+trait MinimumDimensionsOption
 {
     protected $minWidth = 0;
 
     protected $minHeight = 0;
-
-    protected $minSize = 0;
 
     public function minWidth($minWidth)
     {
@@ -24,19 +22,11 @@ trait MinimumOption
         return $this;
     }
 
-    public function minSize($minSize)
-    {
-        $this->minSize = $minSize;
-
-        return $this;
-    }
-
-    protected function getMinimums()
+    protected function getMinimumDimensions()
     {
         return [
             'min_width' => $this->minWidth,
             'min_height' => $this->minHeight,
-            'min_size' => $this->minSize,
         ];
     }
 }

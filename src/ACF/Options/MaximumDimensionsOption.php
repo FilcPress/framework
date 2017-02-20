@@ -2,13 +2,11 @@
 
 namespace FilcPress\ACF\Options;
 
-trait MaximumOption
+trait MaximumDimensionsOption
 {
     protected $maxWidth = 0;
 
     protected $maxHeight = 0;
-
-    protected $maxSize = 0;
 
     public function maxWidth($maxWidth)
     {
@@ -24,19 +22,11 @@ trait MaximumOption
         return $this;
     }
 
-    public function maxSize($maxSize)
-    {
-        $this->maxSize = $maxSize;
-
-        return $this;
-    }
-
-    protected function getMaximums()
+    protected function getMaximumDimensions()
     {
         return [
             'max_width' => $this->maxWidth,
             'max_height' => $this->maxHeight,
-            'max_size' => $this->maxSize,
         ];
     }
 }
