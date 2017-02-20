@@ -12,9 +12,11 @@ class ACFOEmbedField extends ACFField
 
     protected $type = 'oembed';
 
-    public function __construct()
+    public function __construct($id)
     {
         $this->width(640);
         $this->height(390);
+
+        parent::__construct($id);
     }
 }

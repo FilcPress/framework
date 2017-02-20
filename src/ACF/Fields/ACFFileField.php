@@ -15,8 +15,10 @@ class ACFFileField extends ACFField
 
     protected $type = 'file';
 
-    public function __construct()
+    public function __construct($id)
     {
         $this->returnFormat('array');
+
+        parent::__construct($id);
     }
 }
