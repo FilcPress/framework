@@ -27,6 +27,20 @@ trait ReturnFormatOption
         return $this;
     }
 
+    public function returnFormatLabel()
+    {
+        $this->returnFormat = 'label';
+
+        return $this;
+    }
+
+    public function returnFormatArray()
+    {
+        $this->returnFormat = 'array';
+
+        return $this;
+    }
+
     protected function getReturnFormat()
     {
         return [
