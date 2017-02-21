@@ -41,6 +41,13 @@ trait ReturnFormatOption
         return $this;
     }
 
+    public function returnFormatObject()
+    {
+        $this->returnFormat = 'object';
+
+        return $this;
+    }
+
     protected function getReturnFormat()
     {
         return [
