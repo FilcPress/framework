@@ -34,6 +34,20 @@ trait LayoutOption
         return $this;
     }
 
+    public function layoutBlock()
+    {
+        $this->layout = 'block';
+
+        return $this;
+    }
+
+    public function layoutRow()
+    {
+        $this->layout = 'row';
+
+        return $this;
+    }
+
     protected function getLayout()
     {
         return [
