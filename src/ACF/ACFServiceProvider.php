@@ -26,7 +26,11 @@ class ACFServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register Google API key for Google Maps JavaScript API related functionality.
+     * Register Google API key for Google Maps related functionality.
+     *
+     * APIs needed to be enabled:
+     * - Google Map Javascript API
+     * - Google Maps Geocoding API
      */
     protected function setGoogleMapsApiKey()
     {
