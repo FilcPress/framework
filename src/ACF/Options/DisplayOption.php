@@ -34,6 +34,20 @@ trait DisplayOption
         return $this;
     }
 
+    public function displayGroup()
+    {
+        $this->display = 'group';
+
+        return $this;
+    }
+
+    public function displaySeamless()
+    {
+        $this->display = 'seamless';
+
+        return $this;
+    }
+
     protected function getDisplay()
     {
         return [
