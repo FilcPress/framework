@@ -2,7 +2,7 @@
 
 namespace FilcPress\ACF\Options;
 
-trait MaximumValueOption
+trait MaximumOption
 {
     protected $max = '';
 

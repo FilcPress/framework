@@ -2,7 +2,7 @@
 
 namespace FilcPress\ACF\Options;
 
-trait MinimumValueOption
+trait MinimumOption
 {
     protected $min = '';
 
