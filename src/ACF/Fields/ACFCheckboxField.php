@@ -16,4 +16,11 @@ class ACFCheckboxField extends ACFField
     use ChoicesOption, AllowCustomOption, SaveCustomOption, DefaultValueOption, LayoutOption, ToggleOption, ReturnFormatOption;
 
     protected $type = 'checkbox';
+
+    public function __construct($id)
+    {
+        $this->layoutVertical();
+
+        parent::__construct($id);
+    }
 }

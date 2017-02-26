@@ -4,7 +4,7 @@ namespace FilcPress\ACF\Options;
 
 trait LayoutOption
 {
-    protected $layout = 'vertical';
+    protected $layout = '';
 
     public function layout($layout)
     {

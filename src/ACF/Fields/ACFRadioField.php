@@ -17,4 +17,11 @@ class ACFRadioField extends ACFField
         ReturnFormatOption;
 
     protected $type = 'radio';
+
+    public function __construct($id)
+    {
+        $this->layoutVertical();
+
+        parent::__construct($id);
+    }
 }
