@@ -53,6 +53,7 @@ if (! function_exists('wp_config')) {
         // Disable plugin installations, update, system updates and more
         // =============================================================
         define('DISALLOW_FILE_MODS', true);
+        define('WP_AUTO_UPDATE_CORE', false);
 
         // ==============================================================
         // Salts, for security

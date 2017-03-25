@@ -2,22 +2,8 @@
 
 namespace FilcPress\WordPress;
 
-use Illuminate\Container\Container;
-
 class AdminMenu
 {
-    /**
-     * The IoC container instance.
-     *
-     * @var \Illuminate\Container\Container
-     */
-    protected $container;
-
-    public function __construct(Container $container)
-    {
-        $this->container = $container;
-    }
-
     public function hidePosts()
     {
         add_action('admin_menu', function () {
