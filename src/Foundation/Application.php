@@ -11,7 +11,7 @@ class Application extends LaravelApplication
      *
      * @var string
      */
-    const VERSION = '0.2';
+    const VERSION = '0.3.0';
 
     /**
      * Get the path to the application "app" directory.
