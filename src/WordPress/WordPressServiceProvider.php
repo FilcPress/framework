@@ -2,6 +2,8 @@
 
 namespace FilcPress\WordPress;
 
+use DB;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\ServiceProvider;
 
 class WordPressServiceProvider extends ServiceProvider
@@ -15,11 +17,7 @@ class WordPressServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if ($this->isCli()) {
-            return;
-        }
-
-        if ($this->shouldLoadTheme()) {
+        if (! $this->isCli() && $this->shouldLoadTheme()) {
             // Load the theme template.
             require_once(ABSPATH.WPINC.'/template-loader.php');
             return;
@@ -36,10 +34,19 @@ class WordPressServiceProvider extends ServiceProvider
         $this->registerAdminMenuManager();
 
         if ($this->isCli()) {
-            return;
+            if (! $this->isWordPressInstalled()) {
+                $this->setWordPressStatusToInstalling();
+            }
+
+            // Set common headers, to prevent warnings from plugins
+            $_SERVER['SERVER_PROTOCOL'] = 'HTTP/1.0';
+            $_SERVER['SERVER_NAME'] = env('APP_DOMAIN', 'filcpress.dev');
+            $_SERVER['HTTP_USER_AGENT'] = '';
+            $_SERVER['REQUEST_METHOD'] = 'GET';
+            $_SERVER['REMOTE_ADDR'] = '127.0.0.1';
         }
 
-        if ($this->shouldReinitializeWordpress()) {
+        if (! $this->isCli() && $this->shouldReinitializeWordpress()) {
             require(dirname(ABSPATH).'/wp-config.php');
             return;
         }
@@ -51,13 +58,19 @@ class WordPressServiceProvider extends ServiceProvider
             return;
         }
 
-        define('WP_USE_THEMES', true);
+        if (! $this->isCli()) {
+            define('WP_USE_THEMES', true);
+        }
+
         // Load the WordPress library.
         require(config('wordpress.path').'/wp-load.php');
-        // Set up the WordPress query.
-        wp();
 
-        $this->setThemeToBeLoaded();
+        if (! $this->isCli()) {
+            // Set up the WordPress query.
+            wp();
+
+            $this->setThemeToBeLoaded();
+        }
     }
 
     /**
@@ -107,5 +120,21 @@ class WordPressServiceProvider extends ServiceProvider
     private function isCli()
     {
         return php_sapi_name() === 'cli';
+    }
+
+    private function isWordPressInstalled()
+    {
+        try {
+            $siteUrlRow = DB::table('wp_options')->where('option_name', 'siteurl')->first();
+        } catch (QueryException $e) {
+            return false;
+        }
+
+        return true;
+    }
+
+    private function setWordPressStatusToInstalling()
+    {
+        define('WP_INSTALLING', true);
     }
 }
