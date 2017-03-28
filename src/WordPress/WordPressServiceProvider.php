@@ -8,22 +8,6 @@ use Illuminate\Support\ServiceProvider;
 
 class WordPressServiceProvider extends ServiceProvider
 {
-    protected $loadTheme = false;
-
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        if (! $this->isCli() && $this->shouldLoadTheme()) {
-            // Load the theme template.
-            require_once(ABSPATH.WPINC.'/template-loader.php');
-            return;
-        }
-    }
-
     /**
      * Register the service provider.
      *
@@ -57,20 +41,11 @@ class WordPressServiceProvider extends ServiceProvider
              */
             return;
         }
-
-        if (! $this->isCli()) {
-            define('WP_USE_THEMES', true);
-        }
+        
+        define('FILCPRESS_ENTRY_POINT', true);
 
         // Load the WordPress library.
         require(config('wordpress.path').'/wp-load.php');
-
-        if (! $this->isCli()) {
-            // Set up the WordPress query.
-            wp();
-
-            $this->setThemeToBeLoaded();
-        }
     }
 
     /**
@@ -107,16 +82,6 @@ class WordPressServiceProvider extends ServiceProvider
         return defined('ABSPATH');
     }
 
-    private function shouldLoadTheme()
-    {
-        return $this->loadTheme;
-    }
-
-    private function setThemeToBeLoaded()
-    {
-        $this->loadTheme = true;
-    }
-
     private function isCli()
     {
         return php_sapi_name() === 'cli';
@@ -125,7 +90,7 @@ class WordPressServiceProvider extends ServiceProvider
     private function isWordPressInstalled()
     {
         try {
-            $siteUrlRow = DB::table('wp_options')->where('option_name', 'siteurl')->first();
+            DB::table('wp_options')->where('option_name', 'siteurl')->first();
         } catch (QueryException $e) {
             return false;
         }

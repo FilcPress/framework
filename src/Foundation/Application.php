@@ -11,7 +11,7 @@ class Application extends LaravelApplication
      *
      * @var string
      */
-    const VERSION = '0.3.0';
+    const VERSION = '0.3.1';
 
     /**
      * Get the path to the application "app" directory.
@@ -21,5 +21,14 @@ class Application extends LaravelApplication
     public function path()
     {
         return $this->basePath.DIRECTORY_SEPARATOR.'theme';
+    }
+
+    /**
+     * Check if FilcPress is in total control of the request.
+     *
+     * @return string
+     */
+    public function isFilcPressRequest() {
+        return defined('FILCPRESS_ENTRY_POINT');
     }
 }
