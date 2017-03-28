@@ -14,16 +14,6 @@ class Application extends LaravelApplication
     const VERSION = '0.3.1';
 
     /**
-     * Get the path to the application "app" directory.
-     *
-     * @return string
-     */
-    public function path()
-    {
-        return $this->basePath.DIRECTORY_SEPARATOR.'theme';
-    }
-
-    /**
      * Check if FilcPress is in total control of the request.
      *
      * @return string
