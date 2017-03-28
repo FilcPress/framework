@@ -47,7 +47,7 @@ if (! function_exists('wp_config')) {
         // ========================
         // Change the default theme
         // ========================
-        define('WP_DEFAULT_THEME', 'theme');
+        define('WP_DEFAULT_THEME', 'app');
 
         // ====================
         // Enable theme loading
