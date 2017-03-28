@@ -49,6 +49,11 @@ if (! function_exists('wp_config')) {
         // ========================
         define('WP_DEFAULT_THEME', 'theme');
 
+        // ====================
+        // Enable theme loading
+        // ====================
+        define('WP_USE_THEMES', true);
+
         // =============================================================
         // Disable plugin installations, update, system updates and more
         // =============================================================

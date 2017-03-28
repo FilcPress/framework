@@ -4,6 +4,7 @@ namespace FilcPress\Foundation\Http;
 
 use Exception;
 use Throwable;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Http\Kernel as LaravelKernel;
@@ -63,6 +64,21 @@ class Kernel extends LaravelKernel
         Facade::clearResolvedInstance('request');
 
         $this->bootstrap();
+
+        $response = '';
+        if ($this->app->isFilcPressRequest()) {
+            ob_start();
+            // Set up the WordPress query.
+            wp();
+
+            // Load the theme template.
+            require(ABSPATH.WPINC.'/template-loader.php');
+
+            $response = ob_get_contents();
+            ob_end_clean();
+        }
+
+        return new Response($response);
     }
 
     /**

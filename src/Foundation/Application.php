@@ -22,4 +22,13 @@ class Application extends LaravelApplication
     {
         return $this->basePath.DIRECTORY_SEPARATOR.'theme';
     }
+
+    /**
+     * Check if FilcPress is in total control of the request.
+     *
+     * @return string
+     */
+    public function isFilcPressRequest() {
+        return defined('FILCPRESS_ENTRY_POINT');
+    }
 }

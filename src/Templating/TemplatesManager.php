@@ -50,8 +50,7 @@ class TemplatesManager implements RegistrarContract
     public function render($templateSlug = null)
     {
         $response = $this->dispatchToTemplate($templateSlug, $this->container->make('request'));
-
-        $response->send();
+        echo $response->getContent();
     }
 
     public function register($slug, $title, $action)
@@ -211,6 +210,7 @@ class TemplatesManager implements RegistrarContract
 
         return isset($group['namespace']) && strpos($uses, '\\') !== 0 ? $group['namespace'].'\\'.$uses : $uses;
     }
+
     /**
      * Dispatch the request to a route and return the response.
      *
