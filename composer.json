@@ -17,7 +17,8 @@
             "src/wp-config.php"
         ],
         "psr-4": {
-            "FilcPress\\": "src/"
+            "FilcPress\\": "src/",
+            "FilcPress\\Tests\\": "tests/"
         }
     }
 }
