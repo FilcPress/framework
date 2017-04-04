@@ -14,6 +14,7 @@ use Illuminate\Container\Container;
 
 class Template
 {
+    use TemplateDependencyResolverTrait;
     /**
      * The template action array.
      *
@@ -190,7 +191,7 @@ class Template
     protected function runCallable()
     {
         $parameters = $this->resolveMethodDependencies(
-            $this->parametersWithoutNulls(), new ReflectionFunction($this->action['uses'])
+            [], new ReflectionFunction($this->action['uses'])
         );
 
         $callable = $this->action['uses'];
