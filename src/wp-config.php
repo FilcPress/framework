@@ -1,6 +1,7 @@
 <?php
 
-function _filcpress_wp_die_handler( $message, $title = '', $args = array() ) {
+function _filcpress_wp_die_handler($message)
+{
     throw new Exception(html_entity_decode($message, ENT_COMPAT, 'UTF-8'));
 }
 
