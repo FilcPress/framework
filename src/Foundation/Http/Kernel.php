@@ -4,7 +4,7 @@ namespace FilcPress\Foundation\Http;
 
 use Exception;
 use Throwable;
-use Illuminate\Http\Response;
+use FilcPress\Http\Response;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Http\Kernel as LaravelKernel;
