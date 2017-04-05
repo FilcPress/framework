@@ -1,5 +1,9 @@
 <?php
 
+function _filcpress_wp_die_handler( $message, $title = '', $args = array() ) {
+    throw new Exception(html_entity_decode($message, ENT_COMPAT, 'UTF-8'));
+}
+
 if (! function_exists('wp_config')) {
     function wp_config($wpConfigLocationFullPath)
     {
@@ -129,6 +133,22 @@ if (! function_exists('wp_config')) {
         if (! defined('ABSPATH')) {
             define('ABSPATH', $wpConfigLocationFullPath.'/wp/');
         }
+
+        // ======================================
+        // Load add_action, add_filter, etc early
+        // ======================================
+        require_once(ABSPATH.'wp-includes/plugin.php');
+
+        // =========================
+        // Set custom wp_die handler
+        // =========================
+        add_filter('wp_die_handler', function () {
+            return '_filcpress_wp_die_handler';
+        });
+
+        // ===============================
+        // Continue initializing WordPress
+        // ===============================
         require_once(ABSPATH.'wp-settings.php');
 
         // Hide WordPress version
